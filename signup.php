@@ -96,23 +96,24 @@ session_start();
 	</div><!-- /blue -->
 
 	<div id="contactwrap">
- 	<div class="col-lg-8">
+ 	<div class="container">
 	 		<h4>Just join and enjoy our services!</h4>
 	 		<div class="hline"></div>
-			<form method="POST" action="registration.php" name="myform" id="payment-form"><br>
+			<form class="form-horizontal" method="POST" action="registration.php" name="myform" id="payment-form"><br>
 			<!--<font size="5em" color = "black"><center>Personal Information</center></font>-->
 
-			<div style="width:50%; margin:0 auto; overflow:auto; _display:inline-block;"> 
-    		<div style="width:200px; float:right">
-
 			<div class="form-group">
-				<label for="InputAddress1">Address</label><br>
-				<input type="text" name="address" id="address" value="" placeholder="Address" onblur="ValidateAddress()"/>
+				<label class="control-label col-sm-2" for="InputAddress1">Address</label>
+				<div class="col-sm-10"> 
+				<input type="text" class= "form-control" name="address" id="address" value="" placeholder="Address" onblur="ValidateAddress()"/>
 			</div>
+		    </div>
 
 			<div class="form-group">
-				<label for="InputCity1">City</label><br>
-				<input type="text" name="city" value="" placeholder="City" onblur="ValidateCity()" />
+				<label class="control-label col-sm-2" for="InputCity1">City</label><br>
+				<div class="col-sm-10"> 
+					<input type="text" class= "form-control"  name="city" value="" placeholder="City" onblur="ValidateCity()" />
+			</div>
 			</div>
 
 			<div class="form-group">
