@@ -2,13 +2,11 @@
 require_once 'dbConfig.php';
 session_start();
 
-$error_msg = "";
-
 if(!isset($_SESSION['email'])){
     if(isset($_POST['submit'])){//用户提交登录表单时执行如下代码
         $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-        $user_email = mysqli_real_escape_string($dbc,trim($_POST['email']));
-        $user_password = mysqli_real_escape_string($dbc,trim($_POST['password']));
+        $user_email = $_POST['email'];
+        $user_password = $_POST['password'];
 
         if(!empty($user_email)&&!empty($user_password)){
             //MySql中的SHA()函数用于对字符串进行单向加密
@@ -38,7 +36,7 @@ if(!isset($_SESSION['email'])){
         }
     }
 }else{//如果用户已经登录，则直接跳转到已经登录页面
-    $home_url = 'memberHome.php';
+    $home_url = 'member.php';
     header('Location: '.$home_url);
 }
 ?>
@@ -68,7 +66,8 @@ if(!isset($_SESSION['email'])){
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <script src="assets/js/modernizr.js"></script>
     </head>
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -77,14 +76,31 @@ if(!isset($_SESSION['email'])){
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">SOLID.</a>
+          <a class="navbar-brand" href="index.php">SOLID.</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <li class="active"><a href="signup.html">SIGN UP</a></li>
-            <li class="dropdown">
+            <li class="active"><a href="index.php">HOME</a></li>
+            <li><a href="about.php">ABOUT</a></li>
+            <?php 
+                if(isset($_SESSION['email'])) 
+                {
+                ?>
+                    <li><a href="member.php">Welcome, <?php echo $_SESSION['name'];?></a></li>
+
+                    <li>
+                    <li><a href="logout.php" class="button">Log Out</a></li>
+            <?php  
+                } else {
+            ?>
+
+                <li>
+                <li><a href="signup.php" class="button">Sign Up</a></li>
+                <li><a href="login.php" class="button">Sign In</a></li>
+            <?php  
+                }
+            ?>
+            <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="blog.html">BLOG</a></li>
@@ -92,46 +108,42 @@ if(!isset($_SESSION['email'])){
                 <li><a href="portfolio.html">PORTFOLIO</a></li>
                 <li><a href="single-project.html">SINGLE PROJECT</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
+    <div id="blue">
+        <div class="container">
+            <div class="row">
+                <h3>Sign In</h3>
+            </div><!-- /row -->
+        </div> <!-- /container -->
+    </div><!-- /blue -->
 
 
-
-            <!-- Main -->
-                <section id="main" class="container 50%">
-                    <header>
-                        <h2>Welcome Back!</h2>
-                        <p>Enter Your E-mail Address and Password</p>
-                    </header>
-                    
-                    <div class="box">
-                        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                            <br>
-
-                                    <input type="text" name="email" id="email" value="" value="" placeholder="Username" >
-
-                                    <input type="text" name="password" id="passord" value="" placeholder="Password" />
-
-                                    <ul class="actions align-center">
-                                        <li><input type="submit" value="Sign In" name="submit"></li>
-                                    </ul>
-                        </form>
+    <div id="contactwrap">
+        <div class="container">
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                </div>
+                <br>
+                <input type="submit" value="Submit" class="btn btn-primary" name="submit">
+            </form>
+        </div>
+    </div>
         
 
-                          <!-- jQuery is used only for this example; it isn't required to use Stripe -->
-                        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
-                    </div>
-                </section>
-
-
-        </div>
-
-
-    </body>
-</html>
+</body>
 </html>
