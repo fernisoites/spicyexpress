@@ -1,5 +1,10 @@
 <?php
+	require_once 'dbConfig.php';
 	session_start();
+	if(!isset($_SESSION['email'])){
+		$home_url = 'login.php';
+    	header('Location: '.$home_url);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +17,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/ico/favicon.ico">
 
-    <title>UVA - Bootstrap 3 Theme</title>
+    <title>SOLID - Bootstrap 3 Theme</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -53,10 +58,10 @@
             <li class="active"><a href="index.php">HOME</a></li>
             <li><a href="about.php">ABOUT</a></li>
             <?php 
-				if(isset($_SESSION['username'])) 
+				if(isset($_SESSION['email'])) 
 				{
 				?>
-					<li><a href="member.php">Welcome, <?php echo $_SESSION['username'];?></a></li>
+					<li><a href="member.php">Welcome, <?php echo $_SESSION['email'];?></a></li>
 
 					<li>
 					<li><a href="logout.php" class="button">Log Out</a></li>
@@ -91,7 +96,7 @@
 	<div id="blue">
 	    <div class="container">
 			<div class="row">
-				<h3><center>Welcome, <?php echo $_SESSION['username'];?></center></h3>
+				<h3><center>Welcome, <?php echo $_SESSION['name'];?></center></h3>
 			</div><!-- /row -->
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
@@ -104,30 +109,96 @@
 	 	<div class="row">
 		 	<div class="col-lg-8 col-lg-offset-2 centered">
 		 		<!--<h2>We create awesome designs to standout your site or product. Check some of our latest works.</h2>-->
-                <a href="#" class="btn btn-theme">Create Shipment</a>
+                <a href="submitOrder.php" class="btn btn-theme">Create Shipment</a>
+                <a href="profile.php" class="btn btn-theme">Show Profile</a>
 		 		<br>
 		 		<div class="hline"></div>
                 <br>
                 <br>
 
+
+<?php
+
+
+
+        $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+        $user_email = $_SESSION['username'];
+
+            $query = "SELECT trackingnum FROM shipment WHERE email = '$user_email' ORDER BY trackingnum desc";
+            //用用户名和密码进行查询
+            $data = mysqli_query($dbc,$query);
+            //print_r(mysqli_fetch_array($data));
+            //print_r(mysqli_fetch_array($data));
+            //print_r(mysqli_fetch_array($data));
+
+            //$row = mysqli_fetch_array($data);
+            //若查到的记录正好为一条，则设置SESSION，同时进行页面重定向
+            //$history = array_values($row);
+        //print_r($history);
+
+
+
+?>
                 <table style="width:100%">
                                   <tr>
                                     <font size="5"><center>Shipment History</center></font>
-                                    <br>
+                                    
+                                    (Click on your tracking number to track your shipment!)
                                   </tr>
-                                  <tr>
-                                    <td><b>Shipments</b></td> 
-                                    <td><b>Status</b></font></td>
-                                  </tr>
-                                  <tr>
-                                    <td>Tracking Number</td> 
-                                    <td><font size="3" color="red">Processing</font></td>
-                                  </tr>
-                                  <tr>
-                                    <td>Tracking Number</td> 
-                                    <td><font size="3" color="red">Completed</font></td>
-                                  </tr>
+                                  <br>
+                                  <br>
+                                  <br>
+ 
+                                    <?php
+                                    $newdata = $data;
+                                    $line = mysqli_fetch_all($newdata);
+                                    
+
+                                    $count = count($line);
+                                    
+                                    for ($x=0; $x<$count; $x++){
+                                    	echo "<tr>";
+                                    	echo "<td>";
+                                    	echo "<a href=\"tracking.php\">".($line[$x][0])."</a>";
+                                    	//echo "<a href= "index.php\">".($row[0])."</a ><br>";
+                                    
+                                    	echo "</td>";
+                                    	
+                                    	//echo "<td>";
+                                    	//echo "<a href=\"tracking.php\">Tracking</a>";
+                                    	
+                                    	//echo "</td>";
+                                    	echo "</tr>";
+
+                                    }
+                                    
+                                    //while ($line){
+                                    //for ($x = 0; $x < $count; $x++) {
+                                    //	echo "<td>";
+                                    	//echo $line[0];
+                                    //	echo $history[x];
+                                    //	echo "<br>";
+                                    	
+
+                                    //	echo "</td>";
+                                    //}
+
+
+                                    ?>
+                              
+
+                                
+
+                                    
+                                    
+                                  
+                                  
                                 </table>
+                                <br>
+                                <br>
+                                <br>
+
+                                <a href="logout.php">Logout</a>
 		 	</div>
 	 	</div>
 	 </div><! --/container -->

@@ -18,7 +18,7 @@ session_start();
     }
 
     if(! get_magic_quotes_gpc() ){
-        $Username = addslashes ($_POST['name']);
+        //$Username = addslashes ($_POST['name']);
         $Email = addslashes ($_POST['email']);
         $Address = addslashes ($_POST['address']);
         $City = addslashes ($_POST['city']);
@@ -27,7 +27,7 @@ session_start();
         $Password = addslashes ($_POST['password']);
     }
     else{
-        $Username = $_POST['name'];
+        //$Username = $_POST['name'];
         $Email = $_POST['email'];
         $Address = $_POST['address'];
         $City = $_POST['city'];
@@ -39,10 +39,10 @@ session_start();
     echo "<script> validateForm(); </script>";
 
     $sql = "INSERT INTO users ".
-        "(name,email,address,city,state,zip,password) ".
+        "(email,address,city,state,zip,password) ".
           "VALUES ".
-        "('$Username','$Email','$Address','$City','$State','$ZIP','$Password')";
-	mysqli_select_db($conn, 'utickets');
+        "('$Email','$Address','$City','$State','$ZIP','$Password')";
+	mysqli_select_db($conn, 'shipment');
     //echo "<h2>" . $_POST['zip'] . "</h2>";
     //echo "<script>alert($_POST['zip']);</script>";
     $retval = mysqli_query( $conn, $sql );
@@ -51,18 +51,11 @@ session_start();
     {
         die("<script>alert('This username has been used. please try another one.');location.href='".$_SERVER["HTTP_REFERER"]."';</script>");
     }
-    echo "<script>alert('Registration Completed!');location.href='login.php';</script>";
+    echo "<script>alert('Registration Completed!');location.href='member.php';</script>";
     mysqli_close($conn);
 
 ?>
 
-
-<?php
-// Set session variables
-$_SESSION["username"] = "$Username";
-$_SESSION["favanimal"] = "cat";
-echo "Session variables are set.";
-?>
 
 
 

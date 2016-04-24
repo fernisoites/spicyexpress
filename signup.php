@@ -1,6 +1,7 @@
 <?php
 require_once 'dbConfig.php';
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -54,10 +55,10 @@ session_start();
             <li class="active"><a href="index.php">HOME</a></li>
             <li><a href="about.php">ABOUT</a></li>
             <?php 
-				if(isset($_SESSION['username'])) 
+				if(isset($_SESSION['email'])) 
 				{
 				?>
-					<li><a href="member.php">Welcome, <?php echo $_SESSION['username'];?></a></li>
+					<li><a href="member.php">Welcome, <?php echo $_SESSION['email'];?></a></li>
 
 					<li>
 					<li><a href="logout.php" class="button">Log Out</a></li>
@@ -93,47 +94,60 @@ session_start();
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
 
-	
-<div id="contactwrap">
-			<form method="POST" action="registration.php" name="myform" id="payment-form">
+	<div id="contactwrap">
+ 	<div class="col-lg-8 col-lg-offset-2">
+	 		<h4>Just join and enjoy our services!</h4>
+	 		<div class="hline"></div>
+			<form method="POST" action="registration.php" name="myform" id="payment-form"><br>
 			<!--<font size="5em" color = "black"><center>Personal Information</center></font>-->
 
-			<div class="col-sm-12">
-				<label for="InputEmail">Email address</label><br>
-				<input type="email" name="email" class="form-control" value="" value="" placeholder="Email"/>
-			</div>
+			<div style="width:50%; margin:0 auto; overflow:auto; _display:inline-block;"> 
+    			<div style="width:200px; float:right">
+					<div class="form-group">
+						<label for="InputAddress1">Address</label><br>
+						<input type="text" name="address" class="form-control" id="address" placeholder="Address"/>
+					</div>
 
-			<div class="col-sm-6">
-				<label for="InputPassword1">Password</label><br>
-				<input type="text" name="password" class="form-control" value="" placeholder="Password"/>
-			</div>
+					<div class="form-group">
+						<label for="InputCity1">City</label><br>
+						<input type="text" name="city" class="form-control" value="" placeholder="City"/>
+					</div>
 
-			<div class="col-sm-6">
-				<label for="InputConfirmPassWord1">Confirm Password</label><br>
-				<input type="text" name="confirm_password" class="form-control" value="" placeholder="Confirm Password" />
-			</div>
+					<div class="form-group">
+						<label for="InputState1">State</label><br>
+						<input type="text" name="state" class="form-control" value="" placeholder="State"/>
+					</div>
 
-			<div class="col-sm-12">
-				<label for="InputAddress1">Address</label><br>
-				<input type="text" name="address" class="form-control" id="address" placeholder="Address"/>
-			</div>
+					<div class="form-group">
+						<label for="InputZip1">Zip Code</label><br>
+						<input type="text" name="zip" class="form-control" value="" placeholder="Zip Code"/>
+					</div>
+    			</div>
 
-			<div class="col-sm-4">
-				<label for="InputCity1">City</label><br>
-				<input type="text" name="city" class="form-control" value="" placeholder="City"/>
-			</div>
+   				<div style="margin-right:230px">
+					<div class="form-group">
+						<label for="InputName">Your Name</label><br>
+						<input type="text" name="name" class="form-control" value="" placeholder="Name"/>
+					</div>
 
-			<div class="col-sm-4">
-				<label for="InputState1">State</label><br>
-				<input type="text" name="state" class="form-control" value="" placeholder="State"/>
-			</div>
+					<div class="form-group">
+						<label for="InputEmail">Email address</label><br>
+						<input type="email" name="email" class="form-control" value="" value="" placeholder="Email"/>
+					</div>
+					<div class="form-group">
+						<label for="InputPassword1">Password</label><br>
+						<input type="text" name="password" class="form-control" value="" placeholder="Password"/>
+					</div>
 
-			<div class="col-sm-4">
-				<label for="InputZip1">Zip Code</label><br>
-				<input type="text" name="zip" class="form-control" value="" placeholder="Zip Code"/>
-			</div>
+					<div class="form-group">
+						<label for="InputConfirmPassWord1">Confirm Password</label><br>
+						<input type="text" name="confirm_password" class="form-control" value="" placeholder="Confirm Password" />
+					</div>
+		    	</div>
+			</div> 
 
-			<p align="center"><a href="login.php" class="btn btn-theme">Sign Up</a></p>
+			<input type="submit" value="Submit">
+		</div>
 		</form>
 	 </div>
 

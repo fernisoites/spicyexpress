@@ -54,10 +54,10 @@ session_start();
             <li class="active"><a href="index.php">HOME</a></li>
             <li><a href="about.php">ABOUT</a></li>
             <?php 
-				if(isset($_SESSION['username'])) 
+				if(isset($_SESSION['email'])) 
 				{
 				?>
-					<li><a href="member.php">Welcome, <?php echo $_SESSION['username'];?></a></li>
+					<li><a href="member.php">Welcome, <?php echo $_SESSION['email'];?></a></li>
 
 					<li>
 					<li><a href="logout.php" class="button">Log Out</a></li>
@@ -149,8 +149,8 @@ session_start();
             <br>
 		    <br>
 		    <br>
-			<a href="updateProfile.php" class="btn btn-theme">Save</a>
-			<a href="profile.php" class="btn btn-theme">Cancel</a></p>
+			
+			<input type="submit" value="Submit">
 			
 
 		</form>

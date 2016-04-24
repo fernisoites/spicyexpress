@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['username'])){
+	if(!isset($_SESSION['email'])){
 			$home_url = 'login.php';
     		header('Location: '.$home_url);
 	}
@@ -57,10 +57,10 @@
             <li class="active"><a href="index.php">HOME</a></li>
             <li><a href="about.php">ABOUT</a></li>
             <?php 
-				if(isset($_SESSION['username'])) 
+				if(isset($_SESSION['email'])) 
 				{
 				?>
-					<li><a href="member.php">Welcome, <?php echo $_SESSION['name'];?></a></li>
+					<li><a href="member.php">Welcome, <?php echo $_SESSION['email'];?></a></li>
 
 					<li>
 					<li><a href="logout.php" class="button">Log Out</a></li>
@@ -108,7 +108,7 @@
 
 	<div class="container">
 	 	<div class="row">
-	 		<form role="form" method="post" action="processingdata.php">
+	 		<form role="form" method="post" action="order.php">
 	 		<div class="col-lg-6">
 	 			<h4>Where is this shipment going?</h4>
 	 			<div class="hline"></div>
@@ -164,11 +164,11 @@
 						  <div class="row">
 						  	<div class="col-lg-6">
 						  		<label for="InputEmail1">Email</label>
-					    		<input type="email" class="form-control" id="inputemail" value="<?php echo $_SESSION['email']?>" name="FromEmail">
+					    		<input type="email" class="form-control" id="inputemail" value="<?php echo $_SESSION['email']?>" name="fromEmail">
 						  	</div>
 						  	<div class="col-lg-6">
 						  		<label for="InputCity1">City</label>
-					    		<input type="text" class="form-control" id="inputcity" value="<?php echo $_SESSION['city']?>" name="FromCity">
+					    		<input type="text" class="form-control" id="inputcity" value="<?php echo $_SESSION['city']?>" name="fromCity">
 						    </div>
 						  </div>
 					  </div>
@@ -176,16 +176,16 @@
 						  <div class="row">
 						  	<div class="col-lg-6">
 						  		<label for="InputState1">State</label>
-						    	<input type="text" class="form-control" id="inputstate" value="<?php echo $_SESSION['state']?>" name="FromState">
+						    	<input type="text" class="form-control" id="inputstate" value="<?php echo $_SESSION['state']?>" name="fromState">
 						  	</div>
 						  	<div class="col-lg-6">
 						  		<label for="InputZIP1">ZIP</label>
-						    	<input type="text" class="form-control" id="inputzip" value="<?php echo $_SESSION['zip']?>" name="FromZip">
+						    	<input type="text" class="form-control" id="inputzip" value="<?php echo $_SESSION['zip']?>" name="fromZip">
 						    </div>
 						  </div>
 						</div>
 					</div>
-		<center><input type="submit" class="btn btn-theme" value="Submit"></input></center>
+		<center><input type="submit" value="Submit"></input></center>
 		</form>
 	 </div><! --/container -->
 </div>

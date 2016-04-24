@@ -14,6 +14,7 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
     }
 
+        $email = $_SESSION['email'];
         $fromName = $_POST['fromName'];
         $fromEmail = $_POST['fromEmail'];
         $fromAddress = $_POST['fromAddress'];
@@ -27,13 +28,17 @@ session_start();
         $toCity = $_POST['toCity'];
         $toState = $_POST['toState'];
         $toZip = $_POST['toZip'];
+        
+        $trackingnum = date('YmdHis').strtok($email, '@'); 
+
+
 
     echo "<script> validateForm(); </script>";
 
     $sql = "INSERT INTO shipment ".
-        "(fromName, fromEmail, fromAddress, fromCity, fromState, fromZip, toName, toEmail, toAddress, toCity, toState, toZip) ".
+        "(email, fromName, fromEmail, fromAddress, fromCity, fromState, fromZip, toName, toEmail, toAddress, toCity, toState, toZip, trackingnum) ".
           "VALUES ".
-        "('$fromName', '$fromEmail', '$fromAddress','$fromCity','$fromState','$fromZip','$toName','$toEmail','$toAddress','$toCity','$toState','$toZip')";
+        "('$email','$fromName', '$fromEmail', '$fromAddress','$fromCity','$fromState','$fromZip','$toName','$toEmail','$toAddress','$toCity','$toState','$toZip','$trackingnum')";
 	mysqli_select_db($conn, 'shipment');
 
     $retval = mysqli_query( $conn, $sql );
@@ -42,18 +47,12 @@ session_start();
     {
         die("<script>alert('Error loading database.');location.href='".$_SERVER["HTTP_REFERER"]."';</script>");
     }
-    echo "<script>alert('Order Completed!');location.href='index.html';</script>";
+    echo "<script>alert('Order Completed!');location.href='member.php';</script>";
     mysqli_close($conn);
 
 ?>
 
 
-<?php
-// Set session variables
-$_SESSION["username"] = "$Username";
-$_SESSION["favanimal"] = "cat";
-echo "Session variables are set.";
-?>
 
 
 

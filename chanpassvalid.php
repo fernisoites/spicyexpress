@@ -63,7 +63,8 @@ if(!isset($_SESSION['email'])){
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <script src="assets/js/modernizr.js"></script>
     </head>
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -76,10 +77,27 @@ if(!isset($_SESSION['email'])){
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">HOME</a></li>
-            <li><a href="login.php">ABOUT</a></li>
-            <li class="active"><a href="signup.php">SIGN UP</a></li>
-            <li class="dropdown">
+            <li class="active"><a href="index.php">HOME</a></li>
+            <li><a href="about.php">ABOUT</a></li>
+            <?php 
+                if(isset($_SESSION['email'])) 
+                {
+                ?>
+                    <li><a href="member.php">Welcome, <?php echo $_SESSION['name'];?></a></li>
+
+                    <li>
+                    <li><a href="logout.php" class="button">Log Out</a></li>
+            <?php  
+                } else {
+            ?>
+
+                <li>
+                <li><a href="signup.php" class="button">Sign Up</a></li>
+                <li><a href="login.php" class="button">Sign In</a></li>
+            <?php  
+                }
+            ?>
+            <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="blog.html">BLOG</a></li>
@@ -87,7 +105,7 @@ if(!isset($_SESSION['email'])){
                 <li><a href="portfolio.html">PORTFOLIO</a></li>
                 <li><a href="single-project.html">SINGLE PROJECT</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -106,7 +124,7 @@ if(!isset($_SESSION['email'])){
                         </div><!-- /blue -->
 
                          <div id="contactwrap">
-                            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="myform" id="payment-form">
+                            <form method="POST" action="" name="myform" id="payment-form">
                                 <!--<font size="5em" color = "black"><center>Personal Information</center></font>-->
                                 <div class="form-group">
                                     <label for="InputOldPass">Your Old Password</label><br>
