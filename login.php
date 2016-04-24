@@ -4,15 +4,15 @@ session_start();
 
 $error_msg = "";
 
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['email'])){
     if(isset($_POST['submit'])){//用户提交登录表单时执行如下代码
         $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-        $user_username = mysqli_real_escape_string($dbc,trim($_POST['username']));
+        $user_email = mysqli_real_escape_string($dbc,trim($_POST['email']));
         $user_password = mysqli_real_escape_string($dbc,trim($_POST['password']));
 
-        if(!empty($user_username)&&!empty($user_password)){
+        if(!empty($user_email)&&!empty($user_password)){
             //MySql中的SHA()函数用于对字符串进行单向加密
-            $query = "SELECT * FROM users WHERE name = '$user_username' AND password = '$user_password'";
+            $query = "SELECT * FROM users WHERE email = '$user_email' AND password = '$user_password'";
             //用用户名和密码进行查询
             $data = mysqli_query($dbc,$query);
             //若查到的记录正好为一条，则设置SESSION，同时进行页面重定向
@@ -27,7 +27,7 @@ if(!isset($_SESSION['username'])){
                 $_SESSION['state']=$row['state'];
                 $_SESSION['zip']=$row['zip'];
 
-                $home_url = 'memberHome.php';
+                $home_url = 'member.php';
                 header('Location: '.$home_url);
             }else{//若查到的记录不对，则设置错误信息
                 die("<script>alert('Sorry, you must input valid username and password.');location.href='".$_SERVER["HTTP_REFERER"]."';</script>");
@@ -99,6 +99,8 @@ if(!isset($_SESSION['username'])){
     </div>
 
 
+
+
             <!-- Main -->
                 <section id="main" class="container 50%">
                     <header>
@@ -107,28 +109,16 @@ if(!isset($_SESSION['username'])){
                     </header>
                     
                     <div class="box">
-                        <form method="POST" action="registration.php" name="myform" id="payment-form" >
+                        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                             <br>
-                            <div class="row uniform 50%">
-                                <div class="12u">
-                                    <input type="email" name="email" value="" value="" placeholder="E-mail Address" >
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row uniform 50%">
-                                <div class="12u">
-                                    <input type="text" name="password" id="passord" value="" placeholder="Password" />
-                                </div>
-                            </div>
-                        
-                            <div class="row uniform">
-                                <div class="12u">
-                                    <ul class="actions align-center">
-                                        <li><input type="submit" value="Sign In" class="submit-button"></li>
-                                    </ul>
-                                </div>
-                            </div>
 
+                                    <input type="text" name="email" id="email" value="" value="" placeholder="Username" >
+
+                                    <input type="text" name="password" id="passord" value="" placeholder="Password" />
+
+                                    <ul class="actions align-center">
+                                        <li><input type="submit" value="Sign In" name="submit"></li>
+                                    </ul>
                         </form>
         
 
@@ -143,4 +133,5 @@ if(!isset($_SESSION['username'])){
 
 
     </body>
+</html>
 </html>

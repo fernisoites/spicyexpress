@@ -1,8 +1,6 @@
 <?php
 require_once 'dbConfig.php';
 session_start();
-        $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-        $user_username = mysqli_real_escape_string($dbc,trim($_POST['name']));
 ?>
 
 <!DOCTYPE html>
@@ -95,374 +93,50 @@ session_start();
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
 
-	<div id="contactwrap">
- 	<div class="container">
-	 		<h4>Just join and enjoy our services!</h4>
-	 		<div class="hline"></div>
-			<form class="form-horizontal" method="POST" action="registration.php" name="myform" id="payment-form"><br>
+	
+<div id="contactwrap">
+			<form method="POST" action="registration.php" name="myform" id="payment-form">
 			<!--<font size="5em" color = "black"><center>Personal Information</center></font>-->
 
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="InputAddress1">Address</label>
-				<div class="col-sm-10"> 
-				<input type="text" class= "form-control" name="address" id="address" value="" placeholder="Address" onblur="ValidateAddress()"/>
-			</div>
-		    </div>
-
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="InputCity1">City</label><br>
-				<div class="col-sm-10"> 
-					<input type="text" class= "form-control"  name="city" value="" placeholder="City" onblur="ValidateCity()" />
-			</div>
-			</div>
-
-			<div class="form-group">
-				<label for="InputState1">State</label><br>
-				<input type="text" name="state" value="" placeholder="State" onblur="ValidateState()"/>
-			</div>
-
-			<div class="form-group">
-				<label for="InputZip1">Zip Code</label><br>
-				<input type="text" name="zip" value="" placeholder="Zip Code" onblur="ValidateZip()"/>
-			</div>
-    		</div>
-
-   			<div style="margin-right:210px">
-			<div class="form-group">
-				<label for="InputName">Your Name</label><br>
-				<input type="text" name="name" value="" placeholder="Name" onblur="ValidateName()"/>
-			</div>
-
-			<div class="form-group">
+			<div class="col-sm-12">
 				<label for="InputEmail">Email address</label><br>
-				<input type="email" name="email" value="" value="" placeholder="Email" onblur="ValidateEmail()"/>
+				<input type="email" name="email" class="form-control" value="" value="" placeholder="Email"/>
 			</div>
-			<div class="form-group">
+
+			<div class="col-sm-6">
 				<label for="InputPassword1">Password</label><br>
-				<input type="text" name="password" value="" placeholder="Password" onblur="ValidatePassword()" />
+				<input type="text" name="password" class="form-control" value="" placeholder="Password"/>
 			</div>
 
-			<div class="form-group">
+			<div class="col-sm-6">
 				<label for="InputConfirmPassWord1">Confirm Password</label><br>
-				<input type="text" name="confirm_password" value="" placeholder="Confirm Password" onblur="ValidatePassword()" />
+				<input type="text" name="confirm_password" class="form-control" value="" placeholder="Confirm Password" />
 			</div>
-		    </div> 
-		</div> 
 
-			<p><a href="#" class="btn btn-theme">Sign Up</a></p>
-		</div>
+			<div class="col-sm-12">
+				<label for="InputAddress1">Address</label><br>
+				<input type="text" name="address" class="form-control" id="address" placeholder="Address"/>
+			</div>
+
+			<div class="col-sm-4">
+				<label for="InputCity1">City</label><br>
+				<input type="text" name="city" class="form-control" value="" placeholder="City"/>
+			</div>
+
+			<div class="col-sm-4">
+				<label for="InputState1">State</label><br>
+				<input type="text" name="state" class="form-control" value="" placeholder="State"/>
+			</div>
+
+			<div class="col-sm-4">
+				<label for="InputZip1">Zip Code</label><br>
+				<input type="text" name="zip" class="form-control" value="" placeholder="Zip Code"/>
+			</div>
+
+			<p align="center"><a href="login.php" class="btn btn-theme">Sign Up</a></p>
 		</form>
 	 </div>
 
-						<script>
-
-						function ValidateName(){
-							var uname = document.myform.name;
-							var nameformat=/^[a-zA-z ]{1,50}$/;
-							if (uname.value.length<1 || uname.value.length>50){
-						  	alert("Length of Your Name Should Be Between 1 And 50");
-						  	uname.focus();
-						  	return false;
-						  }
-
-						  if (!uname.value.match(nameformat)){
-						  	alert("Your Name Should Only Contain Characters");
-						  	uname.focus();
-						  	return false;
-						  }
-
-						  if (uname.value.trim().length<1){
-						  	alert("please enter name");
-						  	uname.focus();
-						  	return false;
-						  }
-						}
-
-						function ValidatePassword(){
-							var upassword = document.myform.password;
-							var upasswordformat=/^[a-zA-z ]{1,50}$/;
-							//var passowordformat=/^[a-zA-z1-9@#$%&]{1,50}$/;
-							if (upassword.value.length<8 || uname.value.length>16){
-						  	  alert("Length of Your Password Should Be Between 8 and 16");
-						  	  upassword.focus();
-						  	  return false;
-						    }
-						    //if (!upassword.value.match(passwordformat)){
-						  	//  alert("Passord Should Only Contain a-zA-z0-9@#$%&");
-						  	//  upassword.focus();
-						  	//  return false;
-						    //}
-							if (!upassword.value.match(upasswordformat)){
-						  		alert("Your Password Should Only Contain Characters");
-						  		upassword.focus();
-						  		return false;
-						  	}
-
-						    if (upassword.value.trim().length<1){
-						  	  alert("Please Enter Your Password");
-						  	  upassword.focus();
-						  	  return false;
-						    }
-						}
-
-						function ValidateConfirmPass(){
-							var upassword = document.myform.password;
-							var uconfirmpass = document.myform.confirm_password;
-							if (upassword.value != uconfirmpass.value){
-						  	alert("Passwords Should Match");
-						  	uconfirmpass.focus();
-						  	return false;
-						  }
-
-						  if (uconfirmpasss.value.trim().length<1){
-						  	alert("Please Confirm Your Password");
-						  	uconfirmpass.focus();
-						  	return false;
-						  }
-						}
-
-						function ValidateEmail(){
-							var uemail = document.myform.email;
-							var mailformat=/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-                            if (uemail.value.length<1){
-						  	  alert("E-mail Is Required");
-						  	  uemail.focus();
-						  	  return false;
-						    }
-
-						    if (!uemail.value.match(mailformat)){
-						  	  alert("Invalid E-mail Address");
-						  	  uemail.focus();
-						  	  return false;
-						    }
-
-						    if (uemail.value.trim().length<1){
-						  	alert("please enter email");
-						  	uemail.focus();
-						  	return false;
-						  }
-						}
-
-						function ValidateAddress(){
-					      var uaddress = document.myform.address;
-						  var addressformat=/^[a-zA-z0-9-#, ]{1,50}$/;
-						  if (uaddress.value.length<1){
-						  	alert("Address Is Required");
-						  	uaddress.focus();
-						  	return false;
-						  }
-
-						  if (!address.value.match(addressformat)){
-						  	alert("Invalid Address");
-						  	uaddress.focus();
-						  	return false;
-						  }
-
-						  if (uaddress.value.trim().length<1){
-						  	alert("please enter address");
-						  	uaddress.focus();
-						  	return false;
-						  }
-						}
-
-						function ValidateCity(){
-							var ucity = document.myform.city;
-							var cityformat=/^[a-zA-z ]{1,50}$/;
-						  if (ucity.value.length<1){
-						  	alert("City Is Required");
-						  	ucity.focus();
-						  	return false;
-						  }
-
-						  if (!ucity.value.match(cityformat)){
-						  	alert("Invalid City Name");
-						  	ucity.focus();
-						  	return false;
-						  }
-
-						  if (ucity.value.trim().length<1){
-						  	alert("please enter city");
-						  	ucity.focus();
-						  	return false;
-						  }
-						}
-
-						function ValidateState(){
-							var ustate = document.myform.state;
-							var stateformat=/^[a-zA-z ]{1,50}$/;
-						  if (ustate.value.length<1){
-						  	alert("State Is Required");
-						  	ustate.focus();
-						  	return false;
-						  }
-
-						  if (!ustate.value.match(stateformat)){
-						  	alert("Invalid State Name");
-						  	ustate.focus();
-						  	return false;
-						  }
-
-						  if (ustate.value.trim().length<1){
-						  	alert("please enter state");
-						  	ustate.focus();
-						  	return false;
-						  }
-						}
-
-						function ValidateZip(){
-							var uzip = document.myform.zip;
-							var zipformat=/^[0-9]{1,50}$/;
-						  if (uzip.value.length<1){
-						  	alert("Zip Code Is Required");
-						  	uzip.focus();
-						  	return false;
-						  }
-
-						  if (!uzip.value.match(zipformat)){
-						  	alert("Invalid Zip Code");
-						  	uzip.focus();
-						  	return false;
-						  }
-
-						  if (uzip.value.trim().length<1){
-						  	alert("please enter zip");
-						  	uzip.focus();
-						  	return false;
-						  }
-
-						}
-
-						function ValidateCardNumber(){
-							var ucardnumber = document.myform.cardnumber;
-							var cardnumberformat=/^[0-9]{14,16}$/;
-						  if (ucardnumber.value.length<1){
-						  	alert("Card Number Is Required");
-						  	ucardnumber.focus();
-						  	return false;
-						  }
-
-						  if (!ucardnumber.value.match(cardnumberformat)){
-						  	alert("Invalid Card Number");
-						  	ucardnumber.focus();
-						  	return false;
-						  }		
-
-						  if (ucardnumber.value.trim().length<1){
-						  	alert("please enter cardnumber");
-						  	ucardnumber.focus();
-						  	return false;
-						  }						
-						}
-
-						function ValidateMonth(){
-							var uexpriymonth = document.myform.expiration_month;
-							var expirymonthformat=/^[0-9]{1,2}$/;
-						  if (uexpriymonth.value.length<1){
-						  	alert("Expiration Month Is Required");
-						  	uexpriymonth.focus();
-						  	return false;
-						  }
-
-						  if (!uexpriymonth.value.match(expirymonthformat) || parseInt(uexpriymonth.value) == 0 || parseInt(uexpriymonth.value) > 12){
-						  	alert("Invalid Expiration Month");
-						  	uexpriymonth.focus();
-						  	return false;
-						  }
-
-						  if (uexpriymonth.value.trim().length<1){
-						  	alert("please enter expiremonth");
-						  	uexpriymonth.focus();
-						  	return false;
-						  }								
-						}
-
-						function ValidateYear(){
-							var uexpriyyear = document.myform.expiration_year;
-							var expiryyearformat=/^[0-9]{4}$/;
-						  if (uexpriyyear.value.length<1){
-						  	alert("Expiration Year Is Required");
-						  	uexpriyyear.focus();
-						  	return false;
-						  }
-
-						  if (!uexpriyyear.value.match(expiryyearformat) || parseInt(uexpriyyear.value) < 2016 || parseInt(uexpriyyear.value) > 2040){
-						  	alert("Invalid Expiration Year");
-						  	uexpriyyear.focus();
-						  	return false;
-						  }	
-
-						  if (uexpriyyear.value.trim().length<1){
-						  	alert("please enter expireyear");
-						  	uexpriyyear.focus();
-						  	return false;
-						  }
-
-						}
-
-						function ValidateCVV(){
-							var ucvv = document.myform.cvv;
-							var cvvformat=/^[0-9]{3}$/;
-						  if (ucvv.value.length<1){
-						  	alert("CVV Is Required");
-						  	ucvv.focus();
-						  	return false;
-						  }
-
-						  if (!ucvv.value.match(cvvformat)){
-						  	alert("Invalid CVV");
-						  	ucvv.focus();
-						  	return false;
-						  }	
-
-						  if (ucvv.value.trim().length<1){
-						  	alert("please enter cvv");
-						  	ucvv.focus();
-						  	return false;
-						  }
-
-
-						}
-						</script>
-						
-						<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
-						  <!-- jQuery is used only for this example; it isn't required to use Stripe -->
-						  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
-						  <script type="text/javascript">
-						    // This identifies your website in the createToken call below
-						    Stripe.setPublishableKey('pk_test_qsRW1H2hZShCP9i8DihkIJY2');
-				            function stripeResponseHandler(status, response) {
-				                if (response.error) {
-				                    // re-enable the submit button
-				                    $('.submit-button').removeAttr("disabled");
-				                    // show the errors on the form
-				                    $(".payment-errors").html(response.error.message);
-				                } else {
-				                    var form$ = $("#payment-form");
-				                    // token contains id, last4, and card type
-				                    var token = response['id'];
-				                    // insert the token into the form so it gets submitted to the server
-				                    form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
-				                    // and submit
-				                    form$.get(0).submit();
-				                }
-				            }
-				            $(document).ready(function() {
-				                $("#payment-form").submit(function(event) {
-				                    // disable the submit button to prevent repeated clicks
-				                    $('.submit-button').attr("disabled", "disabled");
-				                    // createToken returns immediately - the supplied callback submits the form if there are no errors
-				                    Stripe.createToken({
-				                        number: $('.card-number').val(),
-				                        cvc: $('.card-cvc').val(),
-				                        exp_month: $('.card-expiry-month').val(),
-				                        exp_year: $('.card-expiry-year').val()
-				                    }, stripeResponseHandler);
-				                    return false; // submit from callback
-				                });
-				            });
-						  </script>
 					</div>
 				</section>
 

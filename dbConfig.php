@@ -6,6 +6,6 @@ define ("DB_USER", "sysadmin"); // set database user
 
 define ("DB_PASSWORD", "sysadmin"); // set database password
 
-define ("DB_NAME", "utickets"); // set database name
+define ("DB_NAME", "shipment"); // set database name
 
 ?>

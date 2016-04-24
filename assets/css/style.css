@@ -407,14 +407,17 @@ csmall2 {
 /* Contact Page */
 #contactwrap {
 	/*background: url(../img/contact.jpg) no-repeat center top;*/
-	margin: 0 0 -1px -2em;
+	margin-top: -40px;
+	margin-left: 150px;
+	/*margin-right:150px;*/
 	padding-top:0px;
-	text-align:center;
+	vertical-align: center;
+	text-align:left;
 	background-attachment: relative;
 	background-position: center center;
 	min-height: 400px;
-	width: 100%;
-
+	width: 75%;
+	
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
