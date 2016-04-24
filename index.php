@@ -91,11 +91,11 @@
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-					<h3>UVA Shipping</h3>
-					<h1>UVA Shipping</h1>
-					<h5>UVA Shipping</h5>
-					<h5>UVA Shipping</h5>
-					<p><a href="#" class="btn btn-theme">Sign Up</a><a href="#" class="btn btn-theme">Sign In</a></p>	
+
+					<h1>Shipping</h1>
+					<h3>Welcome to our company</h3>
+
+					<p><a href="signup.php" class="btn btn-theme">Sign Up</a><a href="login.php" class="btn btn-theme">Sign In </a></p>	
 		
 				</div>
 			
@@ -139,6 +139,7 @@
 	<!-- *****************************************************************************************************************
 	 OUR CLIENTS
 	 ***************************************************************************************************************** -->
+<!--	
 	 <div id="cwrap">
 		 <div class="container">
 		 	<div class="row centered">
@@ -155,12 +156,12 @@
 			 	<div class="col-lg-3 col-md-3 col-sm-3">
 			 		<img src="assets/img/clients/client04.png" class="img-responsive">
 			 	</div>
-		 	</div><! --/row -->
-		 </div><! --/container -->
-	 </div><! --/cwrap -->
-
+		 	</div>
+		 </div>
+	 </div>
+-->
 	
-
+<!--
     <script>
 // Portfolio
 (function($) {
@@ -243,5 +244,8 @@
 	});
 })(jQuery);
 </script>
+
+
+-->
   </body>
 </html>
