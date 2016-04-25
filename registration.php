@@ -6,9 +6,9 @@ session_start();
 <body>
 
 <?php
-    $servername = 'localhost:3306';
-    $username = 'sysadmin';
-    $passwordu = 'sysadmin';
+    $servername = 'localhost';
+    $username = 'root';
+    $passwordu = 'chen2016';
 // Create connection
     $conn = new mysqli($servername, $username, $passwordu);
 
