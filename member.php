@@ -118,81 +118,39 @@
 
 
 <?php
-
-
-
         $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-        $email = $_SESSION['email'];
+        $user_email = $_SESSION['email'];
 
-            $query = "SELECT trackingnum FROM shipment WHERE email = '$email' ORDER BY trackingnum desc";
+            $query = "SELECT trackingnum FROM shipment WHERE email='$user_email' ORDER BY trackingnum desc";
             //用用户名和密码进行查询
-            $data = mysqli_query($dbc,$query);
-            //print_r(mysqli_fetch_array($data));
-            //print_r(mysqli_fetch_array($data));
-            //print_r(mysqli_fetch_array($data));
-
-            //$row = mysqli_fetch_array($data);
-            //若查到的记录正好为一条，则设置SESSION，同时进行页面重定向
-            //$history = array_values($row);
-        //print_r($history);
-
-
-
+            //$data = mysqli_query($dbc,$query);
 ?>
                 <table style="width:100%">
                                   <tr>
                                     <font size="5"><center>Shipment History</center></font>
-                                    
                                     (Click on your tracking number to track your shipment!)
                                   </tr>
                                   <br>
                                   <br>
                                   <br>
- 
-                                    <?php
-                                    $newdata = $data;
-                                    $line = mysqli_fetch_all($newdata);
-                                    
 
-                                    $count = count($line);
-                                    
-                                    for ($x=0; $x<$count; $x++){
-                                    	echo "<tr>";
-                                    	echo "<td>";
-                                    	echo "<a href=\"tracking.php\">".($line[$x][0])."</a>";
-                                    	//echo "<a href= "index.php\">".($row[0])."</a ><br>";
-                                    
-                                    	echo "</td>";
-                                    	
-                                    	//echo "<td>";
-                                    	//echo "<a href=\"tracking.php\">Tracking</a>";
-                                    	
-                                    	//echo "</td>";
-                                    	echo "</tr>";
+<?php
 
-                                    }
-                                    
-                                    //while ($line){
-                                    //for ($x = 0; $x < $count; $x++) {
-                                    //	echo "<td>";
-                                    	//echo $line[0];
-                                    //	echo $history[x];
-                                    //	echo "<br>";
-                                    	
+                                   $result = $dbc->query($query);
+				   while($row=$result->fetch_array()){
+				       echo "<a href=\"#\">".($row[0])."</a><br>";
+				   }
+				   //$line = mysqli_fetch_all($data);
+                                   // $count = count($line);
+                                   // for ($x=0; $x<$count; $x++){
+                                   // 	echo "<tr>";
+                                   // 	echo "<td>";
+                                   // 	echo "<a href=\"tracking.php\">".($line[$x][0])."</a>";
+                                   //    echo "</td>";
+                                   // 	echo "</tr>";
+                                   // }
 
-                                    //	echo "</td>";
-                                    //}
-
-
-                                    ?>
-                              
-
-                                
-
-                                    
-                                    
-                                  
-                                  
+ ?>
                                 </table>
                                 <br>
                                 <br>
