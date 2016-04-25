@@ -18,6 +18,9 @@
 
     <title>UVA - Bootstrap 3 Theme</title>
 
+<!-- BootstrapValidator CSS -->
+    <link href="assets/css/bootstrapValidator.min.css" rel="stylesheet"/>
+	
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
 
@@ -25,15 +28,8 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<!-- BootstrapValidator CSS -->
+    <link href="assets/css/bootstrapValidator.min.css" rel="stylesheet"/>
     
     <script src="assets/js/modernizr.js"></script>
   </head>
@@ -100,36 +96,35 @@
 	 CONTACT WRAP
 	 ***************************************************************************************************************** -->
 
-	<div id="contactwrap">
-	 
+
 	<!-- *****************************************************************************************************************
 	 CONTACT FORMS
 	 ***************************************************************************************************************** -->
 
 	<div class="container">
-	 	<div class="row">
-	 		<form role="form" method="post" action="order.php">
-	 		<div class="col-lg-6">
-	 			<h4>Where is this shipment going?</h4>
-	 			<div class="hline"></div>
+	 	<form id="information" role="form" method="post" action="order.php">
+	 		<div class="row">
+	 			<div class="col-lg-6">
+		 			<h4>Where is this shipment going?</h4>
+		 			<div class="hline"></div>
 
 					  <div class="form-group">
-					    <label for="InputName1">Company or Name</label>
+					    <label for="inputname">Company or Name</label>
 					    <input type="text" class="form-control" id="inputname" name="toName">
 					  </div>
 					  <div class="form-group">
-					    <label for="InputAddr1">Address</label>
+					    <label for="inputaddr">Address</label>
 					    <input type="text" class="form-control" id="inputaddr" name="toAddress">
 					  </div>
 
 					  <div class="form-group">
 						  <div class="row">
 						  	<div class="col-lg-6">
-						  		<label for="InputEmail1">Email</label>
+						  		<label for="Iinputemail">Email</label>
 					    		<input type="email" class="form-control" id="inputemail" name="toEmail">
 						  	</div>
 						  	<div class="col-lg-6">
-						  		<label for="InputCity1">City</label>
+						  		<label for="inputcity">City</label>
 					    		<input type="text" class="form-control" id="inputcity" name="toCity">
 						    </div>
 						  </div>
@@ -138,16 +133,16 @@
 					  <div class="form-group">
 						  <div class="row">
 						  	<div class="col-lg-6">
-						  		<label for="InputState1">State</label>
+						  		<label for="inputstate">State</label>
 						    	<input type="text" class="form-control" id="inputstate" name="toState">
 						  	</div>
 						  	<div class="col-lg-6">
-						  		<label for="InputZIP1">ZIP</label>
+						  		<label for="inputzip">ZIP</label>
 						    	<input type="text" class="form-control" id="inputzip" name="toZip">
 						    </div>
 						  </div>
 					  </div>
-			</div><! --/col-lg-6 -->
+				</div><! --/col-lg-6 -->
 	 		
 	 		<div class="col-lg-6">
 	 			<h4>Where is this shipment coming from?</h4>
@@ -183,48 +178,17 @@
 						    	<input type="text" class="form-control" id="inputzip" value="<?php echo $_SESSION['zip']?>" name="fromZip">
 						    </div>
 						  </div>
-						</div>
-					</div>
-		<center><input type="submit" value="Submit"></input></center>
-		</form>
-	 </div><! --/container -->
+					   </div>
+			</div>
+			</div><! --/container -->
+			<br><br>
+		<center><button type="submit" class="btn btn-primary btn-lg" name="submit">Submit</button></center>
+	</form>
 </div>
 
 	<!-- *****************************************************************************************************************
 	 FOOTER
 	 ***************************************************************************************************************** -->
-	 <div id="footerwrap">
-	 	<div class="container">
-		 	<div class="row">
-		 		<div class="col-lg-4">
-		 			<h4>About</h4>
-		 			<div class="hline-w"></div>
-		 			<p>OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG OMG .</p>
-		 		</div>
-		 		<div class="col-lg-4">
-		 			<h4>Social Links</h4>
-		 			<div class="hline-w"></div>
-		 			<p>
-		 				<a href="#"><i class="fa fa-dribbble"></i></a>
-		 				<a href="#"><i class="fa fa-facebook"></i></a>
-		 				<a href="#"><i class="fa fa-twitter"></i></a>
-		 				<a href="#"><i class="fa fa-instagram"></i></a>
-		 				<a href="#"><i class="fa fa-tumblr"></i></a>
-		 			</p>
-		 		</div>
-		 		<div class="col-lg-4">
-		 			<h4>Our Bunker</h4>
-		 			<div class="hline-w"></div>
-		 			<p>
-		 				Some Ave, 987,<br/>
-		 				22903 VA, Charlottesville,<br/>
-		 				United States.<br/>
-		 			</p>
-		 		</div>
-		 	
-		 	</div><! --/row -->
-	 	</div><! --/container -->
-	 </div><! --/footerwrap -->
 
 	<!--<div id="contactwrap">
 		<form method="POST" action="order.php" class="form-horizontal">
@@ -279,6 +243,97 @@
 		<script src="assets/js/jquery.prettyPhoto.js"></script>
 	  	<script src="assets/js/jquery.isotope.min.js"></script>
 	  	<script src="assets/js/custom.js"></script>
+	  	<!-- jQuery and Bootstrap JS -->
+		<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+		<!-- BootstrapValidator -->
+	    <script src="assets/js/bootstrapValidator.min.js" type="text/javascript"></script>
+		<!-- jQuery and Bootstrap JS -->
+		<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>	
+		<!-- BootstrapValidator -->
+	    <script src="assets/js/bootstrapValidator.min.js" type="text/javascript"></script>
+	    <script src="assets/js/modernizr.js"></script>
+
 
 	</body>
+		<!-- *****************************************************************************************************************
+	 Validation Check
+	 ***************************************************************************************************************** 
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#information").bootstrapValidator({
+				feedbackIcons: {
+					valid: "glyphicon glyphicon-ok",
+					invalid: "glyphicon glyphicon-remove", 
+					validating: "glyphicon glyphicon-refresh"
+				}, 
+				fields : {
+					toName :{
+						message : "Name/Company is required",
+						validators : {
+							notEmpty : {
+								message : "Please provide a Name or a Company Name"
+							},
+							regexp: {
+		                        regexp: /^[a-zA-Z]+$/,
+		                        message: 'The name/company can only consist of letters'
+		                    }
+						}
+					}, 
+					toEmail :{
+						message : "Email address is required",
+						validators : {
+							notEmpty : {
+								message : "Please provide an email address"
+							}, 
+							emailAddress: {
+								message: "Email address was invalid"
+							}
+						}
+					}, 
+					toAddress: {
+		                validators: {
+		                    notEmpty: {
+		                        message: 'The address is required and can\'t be empty'
+		                    }
+		                }
+		            },
+		            toCity: {
+		                validators: {
+		                    notEmpty: {
+		                        message: 'The city is required and can\'t be empty'
+		                    },
+		                    regexp: {
+		                        regexp: /^[a-zA-Z]+$/,
+		                        message: 'The city can only consist of letters'
+		                    }
+		                }
+		            },
+		            toState: {
+		                validators: {
+		                    notEmpty: {
+		                        message: 'The state is required and can\'t be empty'
+		                    },
+		                    regexp: {
+		                        regexp: /^[a-zA-Z]+$/,
+		                        message: 'The state can only consist of letters'
+		                    }
+		                }
+		            },
+					toZip: {
+		                validators: {
+		                	notEmpty: {
+		                        message: 'The ZIP is required and can\'t be empty'
+		                    },
+		                    zipCode: {
+		                        country: 'US',
+		                        message: 'The input is not a valid US zip code'
+		                    }
+		                }
+		            }
+				}
+			});	
+		});
+	</script>-->
 </html>

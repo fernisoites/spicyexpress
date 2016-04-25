@@ -2,41 +2,38 @@
 require_once 'dbConfig.php';
 session_start();
 
-$error_msg = "";
-
-if(!isset($_SESSION['email'])){
-    if(isset($_POST['submit'])){//用户提交登录表单时执行如下代码
+if(isset($_POST['submit'])){//用户提交登录表单时执行如下代码
         $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-        $email = $_SESSION['email'];
-        $OP = trim($_POST['OldPass']);
-        $NP = trim($_POST['NewPass']);
-        $CNP = trim($_POST['ConfirmNewPass']);
-        if(!empty($username)&&!empty($OP)){
+        $user_email = $_POST['email'];
+        $user_oldpassword = $_POST['old_password'];
+        $user_newpassword = $_POST['new_password'];
+        $user_cnewpassword = $_POST['cnew_password'];
+
+        if(!empty($user_email)&&!empty($user_oldpassword)&&!empty($user_newpassword)&&!empty($user_cnewpassword)){
             //MySql中的SHA()函数用于对字符串进行单向加密
-            $query = "SELECT * FROM users WHERE email = '$email' AND password = '$OP'";
+            $query = "SELECT * FROM users WHERE email = '$user_email' AND password = '$user_oldpassword'";
             //用用户名和密码进行查询
             $data = mysqli_query($dbc,$query);
             //若查到的记录正好为一条，则设置SESSION，同时进行页面重定向
-            if (mysqli_num_rows($data)) {
-                if ($NP==$CNP) {
-                    mysql_query("UPDATE users set password='".$NP."'WHERE email='".$email."'");
-                    echo "<div class='op-alert'>恭喜，密码修改成功！</div><div id='dialog-mask'></div>";
-                    echo '<meta http-equiv=refresh content=2;url="index.php">';
+            if(mysqli_num_rows($data)==1){
+                if($user_newpassword==$user_cnewpassword){
+                    $sql = "UPDATE users SET password='$user_newpassword' WHERE email='$user_email'";
+                    if(mysqli_query($dbc, $sql)){
+                        die("<script>alert('You have successfully changed your password.');location.href='member.php';</script>");
+                    }
+                    //$home_url = 'member.php';
+                    //header('Location: '.$home_url);
                 } else {
-                    echo "<div class='op-alert'>两次输入的新密码不同，请重新输入!</div><div id='dialog-mask'></div>";
-                    echo '<meta http-equiv=refresh content=2;url="chanpassvalid.php">';
+                    die("<script>alert('Sorry, new passwords should match.');location.href='".$_SERVER["HTTP_REFERER"]."';</script>");
                 }
-            } else {
-                echo "<div class='op-alert'>旧密码不正确，请重新输入!</div><div id='dialog-mask'></div>";
-                echo '<meta http-equiv=refresh content=2;url="chanpassvalid.php">';
+            }else{//若查到的记录不对，则设置错误信息
+                die("<script>alert('Sorry, you must input valid email and password.');location.href='".$_SERVER["HTTP_REFERER"]."';</script>");
             }
+        }else{
+                die("<script>alert('Sorry, you must input your email, old password and new password.');location.href='".$_SERVER["HTTP_REFERER"]."';</script>");
         }
-    }
-}else{//如果用户已经登录，则直接跳转到已经登录页面
-
 }
 ?>
-
 
 <!DOCTYPE HTML>
 <!--
@@ -83,7 +80,7 @@ if(!isset($_SESSION['email'])){
                 if(isset($_SESSION['email'])) 
                 {
                 ?>
-                    <li><a href="member.php">Welcome, <?php echo $_SESSION['name'];?></a></li>
+                    <li><a href="member.php">Welcome, <?php echo $_SESSION['email'];?></a></li>
 
                     <li>
                     <li><a href="logout.php" class="button">Log Out</a></li>
@@ -111,126 +108,44 @@ if(!isset($_SESSION['email'])){
       </div>
     </div>
 
-
-            <!-- Main -->
-                <section id="main" class="container 50%">
-                    <header>
-                        <div id="blue">
-                            <div class="container">
-                                <div class="row">
-                                    <h3>Change Your Password</h3>
-                                </div><!-- /row -->
-                            </div> <!-- /container -->
-                        </div><!-- /blue -->
-
-                         <div id="contactwrap">
-                            <form method="POST" action="" name="myform" id="payment-form">
-                                <!--<font size="5em" color = "black"><center>Personal Information</center></font>-->
-                                <div class="form-group">
-                                    <label for="InputOldPass">Your Old Password</label><br>
-                                    <input type="text" name="OldPass" value="" placeholder="" onblur="ValidateOldPass()" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="InputNewPass">Your New Password</label><br>
-                                    <input type="text" name="NewPass" value="" value="" placeholder="" onblur="ValidateNewPass()"/>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="ConfirmNewPass">Confirm Your New Password</label><br>
-                                    <input type="text" name="ConfirmNewPass" value="" placeholder="" onblur="ValidateConfirmNewPass()" />
-                                </div>
-
-                                <p><a href="#" name= 'submit' class="btn btn-theme">Submit</a></p>
-                            </form>
-                         </div>
-                    </header>
-                    
-                </section>
-
-
-                        <script>
-
-                        function ValidateOldPass(){
-                            var upassword = document.myform.OldPass;
-                            var upasswordformat=/^[a-zA-z ]{1,50}$/;
-                            //var passowordformat=/^[a-zA-z1-9@#$%&]{1,50}$/;
-                            if (upassword.value.length<8 || uname.value.length>16){
-                              alert("Length of Your Password Should Be Between 8 and 16");
-                              upassword.focus();
-                              return false;
-                            }
-                            //if (!upassword.value.match(passwordformat)){
-                            //  alert("Passord Should Only Contain a-zA-z0-9@#$%&");
-                            //  upassword.focus();
-                            //  return false;
-                            //}
-                            if (!upassword.value.match(upasswordformat)){
-                                alert("Your Password Should Only Contain Characters");
-                                upassword.focus();
-                                return false;
-                            }
-
-                            if (upassword.value.trim().length<1){
-                              alert("Please Enter Your Old Password");
-                              upassword.focus();
-                              return false;
-                            }
-                        }
-
-                        function ValidateNewPass(){
-                            var upassword = document.myform.NewPass;
-                            var upasswordformat=/^[a-zA-z ]{1,50}$/;
-                            //var passowordformat=/^[a-zA-z1-9@#$%&]{1,50}$/;
-                            if (upassword.value.length<8 || uname.value.length>16){
-                              alert("Length of Your Password Should Be Between 8 and 16");
-                              upassword.focus();
-                              return false;
-                            }
-                            //if (!upassword.value.match(passwordformat)){
-                            //  alert("Passord Should Only Contain a-zA-z0-9@#$%&");
-                            //  upassword.focus();
-                            //  return false;
-                            //}
-                            if (!upassword.value.match(upasswordformat)){
-                                alert("Your Password Should Only Contain Characters");
-                                upassword.focus();
-                                return false;
-                            }
-
-                            if (upassword.value.trim().length<1){
-                              alert("Please Enter Your New Password");
-                              upassword.focus();
-                              return false;
-                            }
-                        }
-
-                        function ValidateConfirmNewPass(){
-                            var upassword = document.myform.NewPass;
-                            var uconfirmpass = document.myform.ConfirmNewPass;
-                            if (upassword.value != uconfirmpass.value){
-                            alert("New Passwords Should Match");
-                            uconfirmpass.focus();
-                            return false;
-                          }
-
-                          if (uconfirmpasss.value.trim().length<1){
-                            alert("Please Confirm Your New Password");
-                            uconfirmpass.focus();
-                            return false;
-                          }
-                        }
-
-
-                        </script>
-                        
-                        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
-                          <!-- jQuery is used only for this example; it isn't required to use Stripe -->
-                        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
+    <div id="blue">
+        <div class="container">
+            <div class="row">
+                <h3>Change Your Password</h3>
+            </div><!-- /row -->
+        </div> <!-- /container -->
+    </div><!-- /blue -->
+        <div class="container">
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="password">Your Old Password</label>
+                        <input type="password" class="form-control" id="old_password" name="old_password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="password">Your New Password</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="password">Confirm Your New Password</label>
+                        <input type="password" class="form-control" id="cnew_password" name="cnew_password">
+                    </div>
+                </div>
+                <br>
+                <input type="submit" value="Submit" class="btn btn-primary" name="submit">
+            </form>
         </div>
+        
 
-
-    </body>
+</body>
 </html>

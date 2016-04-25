@@ -1,12 +1,16 @@
-<?php
-require_once 'dbConfig.php';
-session_start();
-
+﻿<?php
+	require_once 'dbConfig.php';
+	session_start();
+	if(isset($_SESSION['email'])){
+		$home_url = 'member.php';
+    	header('Location: '.$home_url);
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +20,16 @@ session_start();
 
     <title>UVA - Bootstrap 3 Theme</title>
 
+	<!-- BootstrapValidator CSS -->
+    <link href="assets/css/bootstrapValidator.min.css" rel="stylesheet"/>
+	
+    <!-- jQuery and Bootstrap JS -->
+	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+		
+	<!-- BootstrapValidator -->
+    <script src="assets/js/bootstrapValidator.min.js" type="text/javascript"></script>
+
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
 
@@ -23,22 +37,20 @@ session_start();
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
+	<!-- BootstrapValidator CSS -->
+    <link href="assets/css/bootstrapValidator.min.css" rel="stylesheet"/>
+	
+    <!-- jQuery and Bootstrap JS -->
+	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+		
+	<!-- BootstrapValidator -->
+    <script src="assets/js/bootstrapValidator.min.js" type="text/javascript"></script>
     <script src="assets/js/modernizr.js"></script>
   </head>
 
-  <body>
-
-    <!-- Fixed navbar -->
+<body>
+ <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -58,29 +70,18 @@ session_start();
 				if(isset($_SESSION['email'])) 
 				{
 				?>
-					<li><a href="member.php">Welcome, <?php echo $_SESSION['email'];?></a></li>
+					<li><a href="member.php">Welcome, <?php echo $_SESSION['username'];?></a></li>
 
-					<li>
 					<li><a href="logout.php" class="button">Log Out</a></li>
 			<?php  
 				} else {
 			?>
 
-				<li>
 				<li><a href="signup.php" class="button">Sign Up</a></li>
 				<li><a href="login.php" class="button">Sign In</a></li>
 			<?php  
 				}
 			?>
-            <!-- <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="blog.html">BLOG</a></li>
-                <li><a href="single-post.html">SINGLE POST</a></li>
-                <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li>
-              </ul>
-            </li> -->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -94,77 +95,156 @@ session_start();
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
 
-	<div id="contactwrap">
- 	<div class="col-lg-8 col-lg-offset-2">
-	 		<h4>Just join and enjoy our services!</h4>
-	 		<div class="hline"></div>
-			<form method="POST" action="registration.php" name="myform" id="payment-form"><br>
-			<!--<font size="5em" color = "black"><center>Personal Information</center></font>-->
 
-			<div style="width:50%; margin:0 auto; overflow:auto; _display:inline-block;"> 
-    			<div style="width:200px; float:right">
+	<div class="container">
+		<section>
+				<form id="registration" method="post" class="form-horizontal" action="registration.php">
+
 					<div class="form-group">
-						<label for="InputAddress1">Address</label><br>
-						<input type="text" name="address" class="form-control" id="address" placeholder="Address"/>
+						<label class="col-md-2 control-label" for="1email">Email Address</label>
+						<div class="col-md-4">
+							<input type="email" class="form-control" id="1email" name="email" placeholder="Your email address" />
+						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="InputCity1">City</label><br>
-						<input type="text" name="city" class="form-control" value="" placeholder="City"/>
+						<label class="col-md-2 control-label" for="1password">Password</label>
+						<div class="col-md-4">
+							<input type="password" class="form-control" id="1password" name="password" placeholder="Password" />
+						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="InputState1">State</label><br>
-						<input type="text" name="state" class="form-control" value="" placeholder="State"/>
+						<label class="col-md-2 control-label" for="1confirm_password">Confirm Password</label>
+						<div class="col-md-4">
+							<input type="password" class="form-control" id="1confirm_password" name="confirm_password" placeholder="Confirm password" />	
+						</div>
+					</div>		
+
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="1address">Address</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="1address" name="address" placeholder="Address" />	
+						</div>
+					</div>	
+
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="1city">City</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="1city" name="city" placeholder="City" />	
+						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="InputZip1">Zip Code</label><br>
-						<input type="text" name="zip" class="form-control" value="" placeholder="Zip Code"/>
-					</div>
-    			</div>
-
-   				<div style="margin-right:230px">
-					<div class="form-group">
-						<label for="InputName">Your Name</label><br>
-						<input type="text" name="name" class="form-control" value="" placeholder="Name"/>
-					</div>
+						<label class="col-md-2 control-label" for="1state">State</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="1state" name="state" placeholder="State" />
+						</div>
+					</div>	
 
 					<div class="form-group">
-						<label for="InputEmail">Email address</label><br>
-						<input type="email" name="email" class="form-control" value="" value="" placeholder="Email"/>
-					</div>
-					<div class="form-group">
-						<label for="InputPassword1">Password</label><br>
-						<input type="text" name="password" class="form-control" value="" placeholder="Password"/>
-					</div>
+						<label class="col-md-2 control-label" for="1zip">Zip Code</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="1zip" name="zip" placeholder="Zip Code" />
+						</div>
+					</div>	
 
-					<div class="form-group">
-						<label for="InputConfirmPassWord1">Confirm Password</label><br>
-						<input type="text" name="confirm_password" class="form-control" value="" placeholder="Confirm Password" />
-					</div>
-		    	</div>
-			</div> 
+					<button type="submit" class="btn btn-primary">Sign Up</button>
 
-			<input type="submit" value="Submit">
-		</div>
-		</form>
-	 </div>
+				</form>
+			</section>
+	</div>
 
-					</div>
-				</section>
+</body>
 
-
-		</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollgress.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-
-	</body>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#registration").bootstrapValidator({
+			feedbackIcons: {
+				valid: "glyphicon glyphicon-ok",
+				invalid: "glyphicon glyphicon-remove", 
+				validating: "glyphicon glyphicon-refresh"
+			}, 
+			fields : {
+				email :{
+					message : "Email address is required",
+					validators : {
+						notEmpty : {
+							message : "Please provide an email address"
+						}, 
+						emailAddress: {
+							message: "Email address was invalid"
+						}
+					}
+				}, 
+				password : {
+					validators: {
+						notEmpty : {
+							message : "Password is required"
+						},
+						stringLength : {
+							min: 8,
+							message: "Password must be 8 characters long"
+						}, 
+						different : {
+							field : "email", 
+							message: "Email address and password can not match"
+						}
+					}
+				}, 
+				confirm_password : {
+					validators: {
+						notEmpty : {
+							message: "Confirm password field is required"
+						}, 
+						identical : {
+							field: "password", 
+							message : "Password and confirmation must match"
+						}
+					}
+				},
+				address: {
+	                validators: {
+	                    notEmpty: {
+	                        message: 'The address is required and can\'t be empty'
+	                    }
+	                }
+	            },
+	            city: {
+	                validators: {
+	                    notEmpty: {
+	                        message: 'The city is required and can\'t be empty'
+	                    },
+	                    regexp: {
+	                        regexp: /^[a-zA-Z]+$/,
+	                        message: 'The city can only consist of letters'
+	                    }
+	                }
+	            },
+	            state: {
+	                validators: {
+	                    notEmpty: {
+	                        message: 'The state is required and can\'t be empty'
+	                    },
+	                    regexp: {
+	                        regexp: /^[a-zA-Z]+$/,
+	                        message: 'The state can only consist of letters'
+	                    }
+	                }
+	            },
+				zip: {
+	                validators: {
+	                	notEmpty: {
+	                        message: 'The ZIP is required and can\'t be empty'
+	                    },
+	                    zipCode: {
+	                        country: 'US',
+	                        message: 'The input is not a valid US zip code'
+	                    }
+	                }
+	            }
+			}
+		});	
+	});
+</script>
 </html>
