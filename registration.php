@@ -1,4 +1,5 @@
 <?php
+require_once 'dbConfig.php';
 session_start();
 ?>
 
@@ -10,7 +11,7 @@ session_start();
     $username = 'root';
     $passwordu = 'chen2016';
 // Create connection
-    $conn = new mysqli($servername, $username, $passwordu);
+    $conn = new mysqli(DB_HOST,DB_USER,DB_PASSWORD);
 
 // Check connection
     if ($conn->connect_error) {
@@ -42,7 +43,7 @@ session_start();
         "(email,address,city,state,zip,password) ".
           "VALUES ".
         "('$Email','$Address','$City','$State','$ZIP','$Password')";
-	mysqli_select_db($conn, 'shipment');
+	mysqli_select_db($conn, DB_NAME);
     //echo "<h2>" . $_POST['zip'] . "</h2>";
     //echo "<script>alert($_POST['zip']);</script>";
     $retval = mysqli_query( $conn, $sql );

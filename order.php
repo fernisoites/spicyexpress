@@ -1,4 +1,5 @@
 <?php
+require_once 'dbConfig.php';
 session_start();
 ?>
 
@@ -7,7 +8,7 @@ session_start();
     $username = 'root';
     $passwordu = 'chen2016';
 // Create connection
-    $conn = new mysqli($servername, $username, $passwordu);
+    $conn = new mysqli(DB_HOST,DB_USER,DB_PASSWORD);
 
 // Check connection
     if ($conn->connect_error) {
@@ -39,7 +40,7 @@ session_start();
         "(email, fromName, fromEmail, fromAddress, fromCity, fromState, fromZip, toName, toEmail, toAddress, toCity, toState, toZip, trackingnum) ".
           "VALUES ".
         "('$email','$fromName', '$fromEmail', '$fromAddress','$fromCity','$fromState','$fromZip','$toName','$toEmail','$toAddress','$toCity','$toState','$toZip','$trackingnum')";
-	mysqli_select_db($conn, 'shipment');
+	mysqli_select_db($conn, DB_NAME);
 
     $retval = mysqli_query( $conn, $sql );
     
