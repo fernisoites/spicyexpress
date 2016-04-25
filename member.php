@@ -96,7 +96,7 @@
 	<div id="blue">
 	    <div class="container">
 			<div class="row">
-				<h3><center>Welcome, <?php echo $_SESSION['name'];?></center></h3>
+				<h3><center>Welcome, <?php echo $_SESSION['email'];?></center></h3>
 			</div><!-- /row -->
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
@@ -122,9 +122,9 @@
 
 
         $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-        $user_email = $_SESSION['username'];
+        $email = $_SESSION['email'];
 
-            $query = "SELECT trackingnum FROM shipment WHERE email = '$user_email' ORDER BY trackingnum desc";
+            $query = "SELECT trackingnum FROM shipment WHERE email = '$email' ORDER BY trackingnum desc";
             //用用户名和密码进行查询
             $data = mysqli_query($dbc,$query);
             //print_r(mysqli_fetch_array($data));

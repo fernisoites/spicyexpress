@@ -49,7 +49,7 @@ session_start();
         die("<script>alert('This username has been used. please try another one.');location.href='".$_SERVER["HTTP_REFERER"]."';</script>");
     }
     mysqli_close($conn);
-    //echo "<script>alert('Registration Completed!');location.href='index.php';</script>";
+    echo "<script>alert('Update Completed!');location.href='member.php';</script>";
     
 
 ?>
