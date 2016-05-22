@@ -90,6 +90,12 @@
 	    <div class="container">
 			<div class="row">
 				<h3>About.</h3>
+        To be added.</div>
+        </div>
+        </div>
+        </div>
+        Powered by: 
+        <a href="//m.kuaidi100.com" target="_blank">快递查询</a>
 			</div><!-- /row -->
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
