@@ -94,8 +94,10 @@
         </div>
         </div>
         </div>
+        <center>
         Powered by: 
         <a href="//m.kuaidi100.com" target="_blank">快递查询</a>
+        </center>
 			</div><!-- /row -->
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
