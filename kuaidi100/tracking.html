@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>package status</title>
+	<script language="javascript" src="jquery-1.4.4.min.js"></script>
+
+	<style> 
+	#retForm{width:640px;line-height:22px;padding-bottom:10px;border-bottom:1px dotted #ccc;}
+	#retData{
+	background:#efefef;
+	padding:10px;
+	line-height:18px;
+	width: 96%;
+	border: 0;
+}
+
+	#retForm{width:640px;line-height:22px;padding-bottom:10px;border-bottom:1px dotted #ccc;}
+	#retData2{
+	background:#efefef;
+	padding:10px;
+	line-height:18px;
+	width: 96%;
+	border: 0;
+}
+
+	.txtPartner{width:960px;margin:20px 10px;padding:10px 0 0 0;border-top:1px solid #dfdfdf;}
+	.txtPartner h1{font-size:14px;color:#FF5632;}
+	.txtPartner a{float:left;margin:0 10px 10px 0;}
+    .logo {
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+	font-family: "微软雅黑";
+}
+    .txtURL {
+	font-size: 12px;
+	padding: 10px;
+}
+    </style>
+</head>
+ 
+<body>
+<div class="result">
+	
+    Your package status:
+    <p>
+<br>
+    The first package: 
+    <br>
+</p>
+ </div>
+
+
+
+
+    <script language="javascript">
+
+            
+			$("#retData").html('loading...');
+			$("#retData2").html('loading...');
+            
+			var artTRK=window.location.href.split("=")[1];
+
+			$.get('getTRK.php', {'artTRK': artTRK}, function(e) {
+
+                var expressid=e.split(",")[0].replace(/\s/g, '');
+			    var expressno=e.split(",")[1].replace(/\s/g, '');
+			    var expressid2=e.split(",")[2].replace(/\s/g, '');
+			    var expressno2=e.split(",")[3].replace(/\s/g, '');
+
+                $.get("get.php",{com:expressid,nu:expressno},
+				function(data)
+				{			
+					$("#retData").html(data);
+				}
+			    );
+
+			    if (expressid2.length!=0) {
+			    $.get("get.php",{com:expressid2,nu:expressno2},
+				function(data)
+				{		
+				    if (expressid2 == "shunfeng" || expressid2 == "zhongtong") {
+			    		data = "<a href='http://www.kuaidi100.com/chaxun?com=" + expressid2 +"&nu="+expressno2 + "'>对不起，本服务暂不兼容中通或者申通，请点击这里</a >";
+			        }	
+					$("#retData2").html(data);
+
+				}
+			    );
+			    }
+
+			   
+                var carrier1 = "The first carrier is " + expressid + ", and the tracking number is: "+expressno;
+			    document.getElementById("carrier1").innerHTML = carrier1;
+
+			    var carrier2 = "The second carrier is " + expressid2 + ", and the tracking number is: "+expressno2;
+			    document.getElementById("carrier2").innerHTML = carrier2;
+
+			});
+
+    </script>
+
+
+
+	<div class="txtAboutSnap">
+        <div id = "carrier1" > </div>
+		<div id="retData"></div>
+
+	</div>
+<br><br><br><br><br>
+	<div class="txtAboutSnap">
+        <div id = "carrier2" > </div>
+		<div id="retData2"></div>
+		
+		<p>快递100查询接口(API), 全自动识别验证系统。快速返回快递单号查询结果。http://www.kuaidi100.com</p>
+	</div>
+
+
+
+
+</div>
+</body>
+ 
+</html>

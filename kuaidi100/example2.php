@@ -86,6 +86,76 @@
 		<p>快递100查询接口(API), 全自动识别验证系统。快速返回快递单号查询结果。http://www.kuaidi100.com</p>
 	</div>
 </div>
+<button type="button" onclick="myFunction()">382351534</button>
+<div id="retData"></div>
+
+
+
+<?php   $var = '123';
+        $link_address = 'http://baidu.com';
+        $trkID = 'fedex';
+        $trkNo = '640436067274';
+         ?>  
+
+</div>
+</p>
+<?php   $var = '123';
+        $link_address = 'http://baidu.com';
+        $trkID2 = 'usps';
+        $trkNo2 = '9400109699937264542083';
+         ?>  
+
+</div>
+</p>
+
+
+<?php
+echo "<h2>before</h2>";
+$result = "http://baidu.com";
+echo "test";
+echo "<a href=example.html?id=" . $trkID . ";trk=" . $trkNo . ">" . $trkNo . " </a>";
+?>
+
+</div>
+
+</p>
+
+
+<?php
+echo "<h2>before</h2>";
+$result = "http://baidu.com";
+echo "test";
+echo "<a href=example.html?id=" . $trkID2 . ";trk=" . $trkNo2 . ">" . $trkNo2 . " </a>";
+?>
+
+</div>
+
+</p>
+
+<form action="page02.php" method="post">            
+	<input type="submit" name="submit" value="提交" /> 
+</form>
+
+</p>
+
+<div class="seatchForm">
+		<div class="txtURL">
+          <p>快递公司：
+          <input name="expressid" type="text" id="expressid" value="tnt"/> 
+		  快递单号：<input name="expressno" type="text" id="expressno" value="382351534"/>
+		  </p>
+          <p>说明：查询时需要发送两个参数：公司名（拼音或英文）；快递单号</p>
+</div>
+		<div class="txtButton"><input type="submit" value="查询" id="btnSnap" class="btnSnap"/></div>
+	</div>
+	<div class="txtAboutSnap">
+		<p>获取范例：</p>
+		<div id="retData"></div>
+		<p>快递100查询接口(API), 全自动识别验证系统。快速返回快递单号查询结果。http://www.kuaidi100.com</p>
+	</div>
+</div>
+
+
 </body>
  
 </html>

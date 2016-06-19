@@ -121,46 +121,42 @@
         $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
         $user_email = $_SESSION['email'];
 
-            $query = "SELECT trackingnum,fromName,fromCity,toCity,express1,exp1trackingnum,express2,exp2trackingnum FROM shipment WHERE email='$user_email' ORDER BY trackingnum desc";
+            $query = "SELECT trackingnum FROM shipment WHERE email='$user_email' ORDER BY trackingnum desc";
             //用用户名和密码进行查询
             //$data = mysqli_query($dbc,$query);
 ?>
+                <table style="width:100%">
+                                  <tr>
+                                    <font size="5"><center>Shipment History</center></font>
+                                    (Click on your tracking number to track your shipment!)
+                                  </tr>
+                                  <br>
+                                  <br>
+                                  <br>
 
-<table style="width:100%">
-	  <tr>
-	    <font size="5"><center>Shipment History</center></font>
-	    (Click on your tracking number to track your shipment!)
-	  </tr>
-	  <br>
-	  <br>
-	  <br>
+<?php
 
-		<?php
-					echo "<tr>";
-				    echo "<td>internal tracking number</td>";
-				    echo "<td>customer</td>";
-				    echo "<td>from</td>";
-				    echo "<td>to</td>";
-				    echo "</tr>";
+                                   $result = $dbc->query($query);
+				   while($row=$result->fetch_array()){
+				       echo "<a href=\"#\">".($row[0])."</a><br>";
+				   }
+				   //$line = mysqli_fetch_all($data);
+                                   // $count = count($line);
+                                   // for ($x=0; $x<$count; $x++){
+                                   // 	echo "<tr>";
+                                   // 	echo "<td>";
+                                   // 	echo "<a href=\"tracking.php\">".($line[$x][0])."</a>";
+                                   //    echo "</td>";
+                                   // 	echo "</tr>";
+                                   // }
 
+ ?>
+                                </table>
+                                <br>
+                                <br>
+                                <br>
 
-                $result = $dbc->query($query);
-				while($row=$result->fetch_array()){
-					echo "<tr>";
-				    echo "<td><a href=editTRK.php?link=" .($row[0]). ' target="_blank" >' .($row[0])."</a><br></td>";
-				    echo "<td>".($row[1])."</td>";
-				    echo "<td>".($row[2])."</td>";
-				    echo "<td>".($row[3])."</td>";
-				    echo "</tr>";
-				}
-
-        ?>
-</table>
-<br>
-<br>
-<br>
-
-<script>
+    <script>
 // Portfolio
 (function($) {
 	"use strict";
