@@ -147,7 +147,7 @@
                 $result = $dbc->query($query);
 				while($row=$result->fetch_array()){
 					echo "<tr>";
-				    echo "<td><a href=editTRK.php?link=" .($row[0]). ' target="_blank" >' .($row[0])."</a><br></td>";
+				    echo "<td><a href=kuaidi100/tracking.html?trk=" .($row[0]). ' target="_blank" >' .($row[0])."</a><br></td>";
 				    echo "<td>".($row[1])."</td>";
 				    echo "<td>".($row[2])."</td>";
 				    echo "<td>".($row[3])."</td>";
