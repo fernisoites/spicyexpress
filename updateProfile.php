@@ -34,10 +34,11 @@ session_start();
     }
 
     echo "<script> validateForm(); </script>";
-    $email = $_SESSION['email'];
-    echo $email;
-    echo $Username;
-    $sql = "UPDATE users SET name='$Username', address='$Address', city='$City', zip = '$ZIP' WHERE email='$email';";
+    $user_email = $_SESSION['email'];
+    $user_email = preg_replace('/\s+/', '', $user_email);
+    //echo $email;
+    //echo $Username;
+    $sql = "UPDATE users SET name='$Username', address='$Address', city='$City', state='$State', zip='$ZIP' WHERE email = '$user_email'";
 
 	mysqli_select_db($conn, DB_NAME);
     //echo "<h2>" . $_POST['zip'] . "</h2>";
@@ -49,6 +50,9 @@ session_start();
         die("<script>alert('This username has been used. please try another one.');location.href='".$_SERVER["HTTP_REFERER"]."';</script>");
     }
     mysqli_close($conn);
+
+    echo "<script>alert('$ZIP');location.href='member.php';</script>";
+
     echo "<script>alert('Update Completed!');location.href='member.php';</script>";
     
 

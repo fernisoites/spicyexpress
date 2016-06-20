@@ -96,26 +96,10 @@ session_start();
 	
 <div id="contactwrap">
 			<form method="POST" action="updateProfile.php" name="myform" id="payment-form">
-			<!--<font size="5em" color = "black"><center>Personal Information</center></font>-->
 
-			<!--<div class="col-sm-12">
-				<label for="InputEmail">Email address</label><br>
-				<input type="email" name="email" class="form-control" value="" value="" placeholder="Email"/>
-			</div>
-
-			<div class="col-sm-6">
-				<label for="InputPassword1">Password</label><br>
-				<input type="text" name="password" class="form-control" value="" placeholder="Password"/>
-			</div>
-
-			<div class="col-sm-6">
-				<label for="InputConfirmPassWord1">Confirm Password</label><br>
-				<input type="text" name="confirm_password" class="form-control" value="" placeholder="Confirm Password" />
-			</div>
-				-->
 			<p align="center" ><div class="col-sm-4" >
 				<label for="InputUserName">UserName</label><br>
-				<input type="text" name="name" class="form-control" value="<?php echo $_SESSION['name'];?>" id="address" placeholder=""/>
+				<input type="text" name="name" class="form-control" value="<?php echo $_SESSION['name'];?>" id="name" placeholder=""/>
 			</div> 
 		    <br>
 		    <br>

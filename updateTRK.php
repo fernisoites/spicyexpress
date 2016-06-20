@@ -33,7 +33,7 @@ session_start();
         $trk2Num = $_POST['trk2Num'];
     }
 
-    echo "<script> validateForm(); </script>";
+    //echo "<script> validateForm(); </script>";
     $email = $_SESSION['email'];
     echo $email;
     echo $Username;
