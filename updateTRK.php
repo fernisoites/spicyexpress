@@ -34,10 +34,10 @@ session_start();
     }
 
     //echo "<script> validateForm(); </script>";
-    $email = $_SESSION['email'];
-    echo $email;
-    echo $Username;
-    $sql = "UPDATE shipment SET express1='$trk1', exp1trackingnum='$trk1Num', express2='$trk2', exp2trackingnum = '$trk2Num' WHERE trackingnum='$artTRK';";
+    //$email = $_SESSION['email'];
+    //echo $email;
+    //echo $Username;
+    $sql = "UPDATE shipment SET express1='$trk1', exp1trackingnum='$trk1Num', express2='$trk2', exp2trackingnum='$trk2Num' WHERE trackingnum='$artTRK'";
 
 	mysqli_select_db($conn, DB_NAME);
     //echo "<h2>" . $_POST['zip'] . "</h2>";

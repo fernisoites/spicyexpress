@@ -116,7 +116,7 @@ session_start();
 
 	
 <div id="contactwrap">
-			<form method="POST" action="updateProfile.php" name="myform" id="payment-form">
+			<form method="POST" action="updateTRK.php" name="myform" id="payment-form">
 
 			<p align="center" ><div class="col-sm-4" >
 				<label for="Internal tracking number">internal tracking number</label><br>
